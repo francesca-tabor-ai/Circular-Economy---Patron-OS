@@ -1,7 +1,25 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Check if API key is available
+const getApiKey = () => {
+  const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+  if (!apiKey || apiKey === 'your_api_key_here') {
+    throw new Error('GEMINI_API_KEY_REQUIRED');
+  }
+  return apiKey;
+};
+
+// Initialize AI only if API key is available
+let ai: GoogleGenAI | null = null;
+
+const getAI = () => {
+  if (!ai) {
+    const apiKey = getApiKey();
+    ai = new GoogleGenAI({ apiKey });
+  }
+  return ai;
+};
 
 const MARA_SYSTEM_INSTRUCTION = `
 You are Mara Elion, the founder of PatronOS. You are "The Renewal Guide".
@@ -27,7 +45,9 @@ Your core philosophy is: "Nothing that holds life, story, or effort should be tr
 `;
 
 export async function generateTierRecommendations(creatorBio: string, mission: string) {
-  const response = await ai.models.generateContent({
+  try {
+    const aiInstance = getAI();
+    const response = await aiInstance.models.generateContent({
     model: "gemini-3-flash-preview",
     contents: `Based on this creator's profile: "${creatorBio}" and mission: "${mission}", suggest 3 recurring patronage tiers focused on relationship depth. 
     Tier 1: Support (Basic access)
@@ -56,33 +76,68 @@ export async function generateTierRecommendations(creatorBio: string, mission: s
     }
   });
 
-  try {
-    return JSON.parse(response.text.trim());
-  } catch (e) {
-    console.error("Failed to parse AI response", e);
-    return null;
+    try {
+      return JSON.parse(response.text.trim());
+    } catch (e) {
+      console.error("Failed to parse AI response", e);
+      return null;
+    }
+  } catch (error: any) {
+    if (error.message === 'GEMINI_API_KEY_REQUIRED') {
+      throw new Error('GEMINI_API_KEY_REQUIRED');
+    }
+    console.error("Failed to generate tier recommendations", error);
+    throw error;
   }
 }
 
 export async function generateWhyYouMatterMessage(creatorName: string, mission: string) {
-  const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
-    contents: `Write a 2-sentence emotional "Why you matter" message from creator ${creatorName} to a potential patron. The mission is: ${mission}. Focus on meaning and co-creation, not sales.`,
-  });
-  return response.text;
+  try {
+    const aiInstance = getAI();
+    const response = await aiInstance.models.generateContent({
+      model: "gemini-3-flash-preview",
+      contents: `Write a 2-sentence emotional "Why you matter" message from creator ${creatorName} to a potential patron. The mission is: ${mission}. Focus on meaning and co-creation, not sales.`,
+    });
+    return response.text;
+  } catch (error: any) {
+    if (error.message === 'GEMINI_API_KEY_REQUIRED') {
+      throw new Error('GEMINI_API_KEY_REQUIRED');
+    }
+    console.error("Failed to generate message", error);
+    throw error;
+  }
 }
 
 export async function chatWithMara(message: string, history: {role: 'user' | 'model', text: string}[]) {
-  const chat = ai.chats.create({
-    model: 'gemini-3-pro-preview',
-    config: {
-      systemInstruction: MARA_SYSTEM_INSTRUCTION,
-    }
-  });
+  try {
+    const aiInstance = getAI();
+    const chat = aiInstance.chats.create({
+      model: 'gemini-3-pro-preview',
+      config: {
+        systemInstruction: MARA_SYSTEM_INSTRUCTION,
+      }
+    });
 
-  // Re-establish history if any
-  // Note: sendMessage doesn't support full history in a single call easily without map/transformation
-  // For this simple implementation, we'll send the new message
-  const response = await chat.sendMessage({ message });
-  return response.text;
+    // Re-establish history if any
+    // Note: sendMessage doesn't support full history in a single call easily without map/transformation
+    // For this simple implementation, we'll send the new message
+    const response = await chat.sendMessage({ message });
+    return response.text;
+  } catch (error: any) {
+    if (error.message === 'GEMINI_API_KEY_REQUIRED') {
+      throw new Error('GEMINI_API_KEY_REQUIRED');
+    }
+    console.error("Failed to chat with Mara", error);
+    throw error;
+  }
+}
+
+// Export a function to check if API key is available
+export function isApiKeyAvailable(): boolean {
+  try {
+    getApiKey();
+    return true;
+  } catch {
+    return false;
+  }
 }

@@ -1,7 +1,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Creator, ChatMessage } from '../types';
-import { chatWithMara } from '../services/geminiService';
+import { chatWithMara, isApiKeyAvailable } from '../services/geminiService';
+import ApiKeyError from './ApiKeyError';
 
 interface FounderGuideProps {
   creator: Creator;
@@ -13,6 +14,7 @@ const FounderGuide: React.FC<FounderGuideProps> = ({ creator }) => {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [apiKeyError, setApiKeyError] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,17 +26,28 @@ const FounderGuide: React.FC<FounderGuideProps> = ({ creator }) => {
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
+    if (!isApiKeyAvailable()) {
+      setApiKeyError(true);
+      return;
+    }
+
     const userMsg = input.trim();
     setInput('');
+    setApiKeyError(false);
     setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
     setIsLoading(true);
 
     try {
       const response = await chatWithMara(userMsg, messages);
       setMessages(prev => [...prev, { role: 'model', text: response || "I'm reflecting on that. Could you tell me more?" }]);
-    } catch (error) {
-      console.error(error);
-      setMessages(prev => [...prev, { role: 'model', text: "I seem to have lost my connection for a moment. Let's take a breath and try again." }]);
+    } catch (error: any) {
+      if (error.message === 'GEMINI_API_KEY_REQUIRED') {
+        setApiKeyError(true);
+        setMessages(prev => [...prev, { role: 'model', text: "I need a Google API key to continue our conversation. Please set up your GEMINI_API_KEY in your .env.local file." }]);
+      } else {
+        console.error(error);
+        setMessages(prev => [...prev, { role: 'model', text: "I seem to have lost my connection for a moment. Let's take a breath and try again." }]);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -61,6 +74,11 @@ const FounderGuide: React.FC<FounderGuideProps> = ({ creator }) => {
 
         {/* Messages */}
         <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-8 scroll-smooth">
+          {apiKeyError && (
+            <div className="mb-4">
+              <ApiKeyError feature="Chat with Mara" />
+            </div>
+          )}
           {messages.map((msg, idx) => (
             <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[80%] px-8 py-6 rounded-[32px] text-base leading-relaxed font-medium shadow-sm transition-all duration-300 ${

@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
 import { Creator, PatronTier } from '../types';
-import { generateTierRecommendations, generateWhyYouMatterMessage } from '../services/geminiService';
+import { generateTierRecommendations, generateWhyYouMatterMessage, isApiKeyAvailable } from '../services/geminiService';
+import ApiKeyError from './ApiKeyError';
 
 interface ConversionEngineProps {
   creator: Creator;
@@ -16,24 +17,57 @@ const ConversionEngine: React.FC<ConversionEngineProps> = ({ creator }) => {
   ]);
   const [whyYouMatter, setWhyYouMatter] = useState<string>("Your support allows me to guide those who seek silence in our noisy world, making deep healing accessible to all.");
 
+  const [apiKeyError, setApiKeyError] = useState<string | null>(null);
+
   const handleSmartTiers = async () => {
-    setLoading(true);
-    const recs = await generateTierRecommendations(creator.bio, creator.mission);
-    if (recs) {
-      setTiers(recs.map((r: any, idx: number) => ({ ...r, id: idx.toString() })));
+    if (!isApiKeyAvailable()) {
+      setApiKeyError('tiers');
+      return;
     }
-    setLoading(false);
+    setApiKeyError(null);
+    setLoading(true);
+    try {
+      const recs = await generateTierRecommendations(creator.bio, creator.mission);
+      if (recs) {
+        setTiers(recs.map((r: any, idx: number) => ({ ...r, id: idx.toString() })));
+      }
+    } catch (error: any) {
+      if (error.message === 'GEMINI_API_KEY_REQUIRED') {
+        setApiKeyError('tiers');
+      } else {
+        console.error('Failed to generate tier recommendations', error);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleGenerateMessaging = async () => {
+    if (!isApiKeyAvailable()) {
+      setApiKeyError('messaging');
+      return;
+    }
+    setApiKeyError(null);
     setLoading(true);
-    const msg = await generateWhyYouMatterMessage(creator.name, creator.mission);
-    if (msg) setWhyYouMatter(msg);
-    setLoading(false);
+    try {
+      const msg = await generateWhyYouMatterMessage(creator.name, creator.mission);
+      if (msg) setWhyYouMatter(msg);
+    } catch (error: any) {
+      if (error.message === 'GEMINI_API_KEY_REQUIRED') {
+        setApiKeyError('messaging');
+      } else {
+        console.error('Failed to generate message', error);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-2 duration-700 space-y-20">
+      {apiKeyError && (
+        <ApiKeyError feature={apiKeyError === 'tiers' ? 'Tier recommendations' : 'Message generation'} />
+      )}
       <section>
         <div className="flex justify-between items-end mb-12">
           <div>

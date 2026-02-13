@@ -1,7 +1,8 @@
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Creator, ChatMessage } from '../types';
-import { chatWithMara } from '../services/geminiService';
+import { chatWithMara, isApiKeyAvailable } from '../services/geminiService';
+import ApiKeyError from './ApiKeyError';
 
 interface MaraChatWidgetProps {
   creator: Creator;
@@ -18,6 +19,7 @@ const MaraChatWidget: React.FC<MaraChatWidgetProps> = ({ creator, activeTab }) =
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [apiKeyError, setApiKeyError] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const starterProbes = useMemo(() => {
@@ -65,8 +67,14 @@ const MaraChatWidget: React.FC<MaraChatWidgetProps> = ({ creator, activeTab }) =
     const textToSend = textOverride || input;
     if (!textToSend.trim() || isLoading) return;
 
+    if (!isApiKeyAvailable()) {
+      setApiKeyError(true);
+      return;
+    }
+
     const userMsg = textToSend.trim();
     if (!textOverride) setInput('');
+    setApiKeyError(false);
     
     setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
     setIsLoading(true);
@@ -74,9 +82,14 @@ const MaraChatWidget: React.FC<MaraChatWidgetProps> = ({ creator, activeTab }) =
     try {
       const response = await chatWithMara(userMsg, messages);
       setMessages(prev => [...prev, { role: 'model', text: response || "I'm reflecting on that. Could you tell me more about what you're feeling?" }]);
-    } catch (error) {
-      console.error(error);
-      setMessages(prev => [...prev, { role: 'model', text: "I seem to have lost my connection for a moment. Let's take a breath and try again." }]);
+    } catch (error: any) {
+      if (error.message === 'GEMINI_API_KEY_REQUIRED') {
+        setApiKeyError(true);
+        setMessages(prev => [...prev, { role: 'model', text: "I need a Google API key to continue our conversation. Please set up your GEMINI_API_KEY in your .env.local file." }]);
+      } else {
+        console.error(error);
+        setMessages(prev => [...prev, { role: 'model', text: "I seem to have lost my connection for a moment. Let's take a breath and try again." }]);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -113,6 +126,11 @@ const MaraChatWidget: React.FC<MaraChatWidgetProps> = ({ creator, activeTab }) =
 
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50/20">
+            {apiKeyError && (
+              <div className="mb-4">
+                <ApiKeyError feature="Chat with Mara" />
+              </div>
+            )}
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[85%] px-5 py-4 rounded-[28px] text-sm leading-relaxed font-medium shadow-sm transition-all duration-300 ${
