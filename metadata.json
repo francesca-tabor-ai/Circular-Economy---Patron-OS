@@ -1,0 +1,8 @@
+{
+  "name": "PatronOS",
+  "description": "A recurring patronage platform that gives independent creators predictable monthly income from aligned supporters.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
