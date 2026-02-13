@@ -8,27 +8,158 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+      /* Typography - Humanist Sans-Serif */
       body {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         background-color: #ffffff;
-        color: #0f172a;
+        color: #0a0a0a; /* Near-black for primary text */
         -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-feature-settings: "kern" 1;
+        text-rendering: optimizeLegibility;
       }
+
+      /* Typography Hierarchy */
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+      }
+
+      /* Headlines - Large, bold, confident, sentence-case */
+      .headline {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        color: #0a0a0a;
+      }
+
+      /* Body text - Regular/light weights, generous line height */
+      p, body {
+        line-height: 1.7;
+        font-weight: 400;
+      }
+
+      .body-large {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        font-weight: 400;
+        color: #4a4a4a;
+      }
+
+      /* UI & Numbers - Clear, neutral, optimized for data readability */
+      .ui-text {
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        color: #1a1a1a;
+      }
+
+      .number-text {
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      /* Color System */
+      /* Primary text - Black/near-black */
+      .text-primary {
+        color: #0a0a0a;
+      }
+
+      /* Secondary text - Cool greys */
+      .text-secondary {
+        color: #6b7280; /* Cool grey */
+      }
+
+      .text-tertiary {
+        color: #9ca3af; /* Lighter cool grey */
+      }
+
+      /* UI Structure - Cool greys */
+      .border-ui {
+        border-color: #e5e7eb; /* Cool grey border */
+      }
+
+      .bg-ui {
+        background-color: #f9fafb; /* Very light cool grey */
+      }
+
+      /* Signature Gradient - Used sparingly */
       .signature-gradient {
         background: linear-gradient(135deg, #facc15 0%, #4ade80 33%, #2dd4bf 66%, #3b82f6 100%);
       }
+
       .signature-text-gradient {
         background: linear-gradient(135deg, #facc15 0%, #4ade80 33%, #2dd4bf 66%, #3b82f6 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
-      .soft-border {
-        border-color: #f1f5f9;
+
+      /* Rounded UI Components */
+      .rounded-ui {
+        border-radius: 12px;
       }
-      .bg-soft {
-        background-color: #f8fafc;
+
+      .rounded-ui-lg {
+        border-radius: 16px;
+      }
+
+      /* Subtle motion */
+      .transition-subtle {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* White space helpers */
+      .spacing-generous {
+        padding: 3rem 0;
+      }
+
+      @media (min-width: 768px) {
+        .spacing-generous {
+          padding: 4rem 0;
+        }
+      }
+
+      /* Scroll animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+
+      /* Micro interaction hover effects */
+      .hover-lift {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .hover-lift:hover {
+        transform: translateY(-4px);
+      }
+
+      /* Smooth scale on interaction */
+      .interactive-scale {
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .interactive-scale:hover {
+        transform: scale(1.05);
+      }
+
+      .interactive-scale:active {
+        transform: scale(0.95);
       }
     </style>
     <script type="importmap">

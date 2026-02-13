@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Sidebar from './components/Sidebar';
 import LandingPage from './components/LandingPage';
 import IncomeDashboard from './components/IncomeDashboard';
@@ -22,10 +22,35 @@ const App: React.FC = () => {
   const [showLanding, setShowLanding] = useState(true);
   const [activeTab, setActiveTab] = useState<'dashboard' | 'conversion' | 'feed' | 'about'>('dashboard');
   const [creator, setCreator] = useState<Creator>(INITIAL_CREATOR);
+  const mainRef = useRef<HTMLElement>(null);
+  const prevTabRef = useRef<'dashboard' | 'conversion' | 'feed' | 'about' | null>(null);
+
+  // Scroll to top when tab changes
+  useEffect(() => {
+    if (prevTabRef.current !== null && prevTabRef.current !== activeTab) {
+      // Smooth scroll to top
+      if (mainRef.current) {
+        mainRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+    prevTabRef.current = activeTab;
+  }, [activeTab]);
 
   const handleNavigateToDashboard = () => {
     setShowLanding(false);
     setActiveTab('dashboard');
+    // Scroll to top when navigating from landing page
+    setTimeout(() => {
+      if (mainRef.current) {
+        mainRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
+  const handleTabChange = (tab: 'dashboard' | 'conversion' | 'feed' | 'about') => {
+    setActiveTab(tab);
   };
 
   if (showLanding) {
@@ -34,9 +59,9 @@ const App: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-white relative overflow-hidden">
-      <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
+      <Sidebar activeTab={activeTab} onTabChange={handleTabChange} />
       
-      <main className="flex-1 overflow-y-auto">
+      <main ref={mainRef} className="flex-1 overflow-y-auto">
         <header className="px-10 py-8 border-b border-slate-50 flex justify-between items-center bg-white/80 backdrop-blur-md sticky top-0 z-20">
           <div>
             <h1 className="text-xl font-semibold tracking-tight text-slate-900">
