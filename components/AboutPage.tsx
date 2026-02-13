@@ -10,12 +10,12 @@ const AboutPage: React.FC = () => {
           Our Reason for Being
         </div>
         <h2 className="text-5xl font-bold tracking-tight text-slate-900 leading-tight">
-          We exist to make creative lives <br />
-          <span className="signature-text-gradient">financially sustainable.</span>
+          We exist for circular economy creators <br />
+          <span className="signature-text-gradient">building regenerative income.</span>
         </h2>
         <p className="text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
-          The internet made it possible for anyone to create. <br />
-          It did not make it easy to survive as a creator.
+          The circular economy needs creators who regenerate value. <br />
+          We built the platform exclusively for them.
         </p>
       </section>
 
@@ -24,8 +24,8 @@ const AboutPage: React.FC = () => {
         <section className="space-y-6">
           <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">The Problem</h3>
           <div className="space-y-4 text-slate-600 font-medium leading-relaxed">
-            <p>Algorithms reward noise. Ad models reward attention, not meaning. And too many creators are forced into constant output just to stay afloat.</p>
-            <p>We built PatronOS to change that.</p>
+            <p>Linear economies extract value. Circular economies regenerate it. Too many circular economy creators are forced into extractive models just to survive.</p>
+            <p>We built PatronOS exclusively for the circular economy to change that.</p>
           </div>
         </section>
 
@@ -36,19 +36,19 @@ const AboutPage: React.FC = () => {
             <ul className="space-y-2 text-slate-500 font-medium">
               <li className="flex items-center space-x-3">
                 <div className="w-1.5 h-1.5 rounded-full signature-gradient"></div>
-                <span>Meaning-driven</span>
+                <span>Regenerative, not extractive</span>
               </li>
               <li className="flex items-center space-x-3">
                 <div className="w-1.5 h-1.5 rounded-full signature-gradient"></div>
-                <span>Community-supported</span>
+                <span>Circular economy-focused</span>
               </li>
               <li className="flex items-center space-x-3">
                 <div className="w-1.5 h-1.5 rounded-full signature-gradient"></div>
-                <span>Financially stable</span>
+                <span>Building systems that cycle back</span>
               </li>
               <li className="flex items-center space-x-3">
                 <div className="w-1.5 h-1.5 rounded-full signature-gradient"></div>
-                <span>Free to create work that actually matters</span>
+                <span>Free to create work that regenerates value</span>
               </li>
             </ul>
           </div>
@@ -61,7 +61,7 @@ const AboutPage: React.FC = () => {
         <div className="max-w-2xl space-y-8 relative z-10">
           <h3 className="text-3xl font-bold tracking-tight text-slate-900">What We Do</h3>
           <p className="text-lg text-slate-600 font-medium leading-relaxed">
-            PatronOS helps independent creators turn their most aligned supporters into reliable monthly income — without feeling salesy, extractive, or performative.
+            PatronOS helps circular economy creators turn their most aligned supporters into reliable monthly income — through regenerative, circular models that cycle value back to community.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
             <div className="space-y-2">
@@ -85,14 +85,14 @@ const AboutPage: React.FC = () => {
         <section className="space-y-8">
           <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Who We Serve</h3>
           <div className="space-y-4 text-slate-600 font-medium">
-            <p>We are built for creators who care more about depth than scale. For those tired of chasing platforms instead of building relationships.</p>
-            <p className="text-slate-900 font-bold">Healing, education, creativity, and cultural contribution.</p>
+            <p>We are built exclusively for circular economy creators. For those building regenerative systems, not extractive ones.</p>
+            <p className="text-slate-900 font-bold">Circular design, sustainability, regeneration, waste reduction, and circular economy innovation.</p>
           </div>
         </section>
         <section className="space-y-8">
           <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Why Patronage</h3>
           <div className="space-y-4 text-slate-600 font-medium">
-            <p>Patronage is one of the oldest ways culture has survived. We’re not inventing something new. We’re rebuilding something human — using modern tools.</p>
+            <p>Circular patronage is one of the oldest ways regenerative systems have survived. We're rebuilding it for the circular economy — using modern tools.</p>
           </div>
         </section>
       </div>
@@ -101,15 +101,15 @@ const AboutPage: React.FC = () => {
       <section className="border-t border-slate-50 pt-20 grid grid-cols-1 md:grid-cols-3 gap-12">
         <div className="space-y-4">
           <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest">Our Vision</h4>
-          <p className="text-sm text-slate-500 font-medium leading-relaxed">A world where creativity is treated as essential infrastructure — not disposable content.</p>
+          <p className="text-sm text-slate-500 font-medium leading-relaxed">A world where circular economy creators build regenerative income — not extractive content.</p>
         </div>
         <div className="space-y-4">
           <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest">Our Promise</h4>
-          <p className="text-sm text-slate-500 font-medium leading-relaxed">Transparent economics and tools that reduce pressure — not increase it.</p>
+          <p className="text-sm text-slate-500 font-medium leading-relaxed">Circular economics and tools that regenerate value — not extract it.</p>
         </div>
         <div className="space-y-4">
           <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest">The Future</h4>
-          <p className="text-sm text-slate-500 font-medium leading-relaxed">Fewer creators chasing millions of views. More creators supported by people who care.</p>
+          <p className="text-sm text-slate-500 font-medium leading-relaxed">Fewer creators extracting value. More circular economy creators building regenerative systems.</p>
         </div>
       </section>
 

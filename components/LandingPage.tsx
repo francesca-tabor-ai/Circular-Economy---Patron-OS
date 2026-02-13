@@ -103,11 +103,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigateToDashboard }) => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-[-0.03em] text-white leading-[1.1] mb-8">
-            Predictable income for creators<br />
-            <span className="signature-text-gradient inline-block transition-transform duration-500 hover:scale-105">who refuse to be disposable</span>
+            Circular economy creators<br />
+            <span className="signature-text-gradient inline-block transition-transform duration-500 hover:scale-105">building sustainable income</span>
           </h1>
           <p className="text-xl md:text-2xl text-white/90 font-normal leading-[1.8] max-w-3xl mx-auto mb-12">
-            Turn your most aligned supporters into reliable monthly patron income — without algorithms, burnout, or constant launching.
+            The platform exclusively for circular economy creators. Turn your most aligned supporters into reliable monthly patron income — without algorithms, burnout, or constant launching.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button className="bg-white text-[#0a0a0a] px-8 py-4 rounded-full text-base font-semibold hover:bg-white/90 hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl hover:shadow-2xl w-full sm:w-auto">
@@ -127,8 +127,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigateToDashboard }) => {
       >
         <div className="max-w-5xl mx-auto px-6 md:px-10">
           <p className="text-center text-base md:text-lg text-[#6b7280] font-normal leading-[1.7]">
-            <span className="font-semibold text-[#0a0a0a]">Built by people who believe:</span><br className="hidden md:block" />
-            Creativity is essential infrastructure. Community is economic stability. Nothing that holds life, story, or effort should be disposable.
+            <span className="font-semibold text-[#0a0a0a]">Built for the circular economy:</span><br className="hidden md:block" />
+            Where creativity is regenerative, community is circular, and nothing that holds life, story, or effort is disposable.
           </p>
         </div>
       </section>
@@ -139,7 +139,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigateToDashboard }) => {
         className="max-w-5xl mx-auto px-6 md:px-10 py-24 md:py-40 opacity-0"
       >
         <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-[#0a0a0a] mb-12 text-center leading-[1.2]">
-          The creator economy is loud — but not stable
+          The linear economy is loud — but not circular
         </h2>
         <div className="grid md:grid-cols-2 gap-16 mt-20">
           <div className="space-y-6">
@@ -188,7 +188,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigateToDashboard }) => {
         <div className="mt-16 text-center">
           <p className="text-xl font-semibold text-[#0a0a0a] leading-[1.6]">
             You don't need more attention.<br />
-            <span className="text-[#4a4a4a] font-normal">You need reliable support from people who actually care.</span>
+            <span className="text-[#4a4a4a] font-normal">You need a circular economy of support from people who value regeneration over extraction.</span>
           </p>
         </div>
       </section>
@@ -200,10 +200,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigateToDashboard }) => {
       >
         <div className="max-w-5xl mx-auto px-6 md:px-10">
           <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-[#0a0a0a] mb-8 text-center leading-[1.2]">
-            A different model: patron income
+            A circular model: regenerative patron income
           </h2>
           <p className="text-xl text-[#4a4a4a] font-normal text-center mb-20 max-w-3xl mx-auto leading-[1.7]">
-            Instead of chasing thousands of casual followers…
+            Instead of extracting value from thousands of casual followers, build a circular economy of support…
           </p>
           <div className="bg-white p-12 md:p-20 rounded-2xl border border-[#e5e7eb] hover:shadow-xl transition-all duration-500 hover:border-[#d1d5db]">
             <h3 className="text-2xl font-bold text-[#0a0a0a] mb-10 leading-[1.3]">
@@ -281,29 +281,29 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigateToDashboard }) => {
       <section className="bg-[#f9fafb] py-24 md:py-40">
         <div className="max-w-5xl mx-auto px-6 md:px-10">
           <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-[#0a0a0a] mb-12 text-center leading-[1.2]">
-            This is for you if you:
+            This is for circular economy creators:
           </h2>
           <div className="bg-white p-12 md:p-20 rounded-2xl border border-[#e5e7eb]">
             <ul className="space-y-6">
               <li className="flex items-start space-x-4">
                 <span className="text-2xl text-[#4ade80] mt-0.5">✔</span>
-                <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7]">Care more about depth than scale</p>
+                <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7]">Building regenerative, circular systems</p>
               </li>
               <li className="flex items-start space-x-4">
                 <span className="text-2xl text-[#4ade80] mt-0.5">✔</span>
-                <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7]">Are tired of algorithm pressure</p>
+                <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7]">Committed to reducing waste and extraction</p>
               </li>
               <li className="flex items-start space-x-4">
                 <span className="text-2xl text-[#4ade80] mt-0.5">✔</span>
-                <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7]">Want fewer, more committed supporters</p>
+                <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7]">Creating value that cycles back to community</p>
               </li>
               <li className="flex items-start space-x-4">
                 <span className="text-2xl text-[#4ade80] mt-0.5">✔</span>
-                <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7]">Are building work around creativity, healing, education, or culture</p>
+                <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7]">Working in sustainability, regeneration, circular design, or circular economy</p>
               </li>
               <li className="flex items-start space-x-4">
                 <span className="text-2xl text-[#4ade80] mt-0.5">✔</span>
-                <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7]">Want a sustainable creative life — not a content treadmill</p>
+                <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7]">Want income that regenerates, not extracts</p>
               </li>
             </ul>
           </div>
@@ -338,14 +338,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigateToDashboard }) => {
               A note from our founder
             </h2>
             <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7] mb-8">
-              This platform was built on one belief:
+              This platform was built for the circular economy:
             </p>
             <p className="text-xl font-semibold text-[#0a0a0a] mb-10 leading-[1.6]">
-              People don't heal, create, or survive alone.<br />
-              They do it inside systems that hold them.
+              Circular economy creators don't extract value.<br />
+              They regenerate it — in systems that cycle back.
             </p>
             <p className="text-lg text-[#4a4a4a] font-normal leading-[1.7] mb-10">
-              We built this to help creators build those systems — economically and culturally.
+              We built this exclusively for circular economy creators to build regenerative income systems — economically and culturally.
             </p>
             <p className="text-base text-[#6b7280] font-medium">
               — Mara Elion, Founder
@@ -396,8 +396,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigateToDashboard }) => {
               </li>
             </ul>
             <p className="text-center text-lg text-[#4a4a4a] font-normal leading-[1.7]">
-              Patronage isn't new.<br />
-              We just rebuilt it for the internet.
+              Circular patronage isn't new.<br />
+              We just rebuilt it for the circular economy — on the internet.
             </p>
           </div>
         </div>
@@ -458,7 +458,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigateToDashboard }) => {
             <span className="text-lg font-bold tracking-tight text-[#0a0a0a]">Patron<span className="text-[#6b7280]">OS</span></span>
           </div>
           <p className="text-sm text-[#6b7280] font-normal">
-            Making creative lives financially sustainable.
+            Circular economy creators building regenerative income.
           </p>
         </div>
       </footer>
